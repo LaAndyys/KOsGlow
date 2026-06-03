@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Kenini - K OS GLOW</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Passion+One:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="quiz-page" style="background: #000000;">
+
+    <img class="quiz-bg" src="images/conciertos.jpeg" alt="Fondo Quiz" aria-hidden="true">
+    <a href="index.html" class="home-button-corner" aria-label="Volver al inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff" viewBox="0 0 24 24" style="filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8));">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+    </a>
+
+    <main class="quiz-container">
+        <h1 class="quiz-main-title">¿Qué tanto sabes de Kenia Os?</h1>
+        
+        <div id="quiz-form"></div>
+        
+        <button id="submit-quiz-btn" class="submit-btn" style="display: none;">Ver mis resultados</button>
+
+        <div id="quiz-results" class="results-box" style="display: none;">
+            
+            <img id="result-gif" src="" alt="Reacción" style="display: block; margin: 0 auto 20px auto; width: 100%; max-width: 240px; height: auto; border-radius: 12px; border: 3px solid #ffc800; box-shadow: 0 8px 20px rgba(0,0,0,0.6); object-fit: cover;">
+            
+            <h2 id="score-text"></h2>
+            <p id="rank-text"></p>
+            <button onclick="location.reload()" class="submit-btn reload-btn">VOLVER A INTENTAR</button>
+        </div>
+    </main>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

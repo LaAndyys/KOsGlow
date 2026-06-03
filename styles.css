@@ -1,0 +1,1204 @@
+/* =========================================
+   1. VARIABLES Y RESET
+   ========================================= */
+:root {
+    /* El color vino oscuro de tu diseño */
+    --kos-red: #840000; 
+    --kos-dark-red: #5a0000;
+    --kos-font: 'Passion One', impact, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    font-family: var(--kos-font);
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. SECCIÓN PORTADA (HERO)
+   ========================================= */
+.kos-hero {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Ocupa un 60% del alto de la pantalla */
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.kos-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 1;
+}
+
+/* Letras alineadas verticalmente a la izquierda */
+.kos-vertical-title {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--kos-red);
+    line-height: 0.8;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Sombra oscura para destacar */
+}
+
+/* --- SECCIÓN 2: CINTILLO (BANNER) --- */
+.kos-banner {
+    background-color: var(--kos-red);
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.kos-banner h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--kos-red); /* Ahora el texto es rojo */
+    -webkit-text-stroke: 2.5px #ffffff; /* Ahora el contorno es blanco */
+    letter-spacing: 2px;
+    margin: 0;
+    /* Agregamos una pequeña sombra oscura para darle la misma profundidad que en tu imagen */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   4. SECCIÓN TARJETAS (GRID)
+   ========================================= */
+.kos-menu-section {
+    position: relative;
+    padding: 60px 20px 100px;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* El fondo desenfocado */
+.kos-blur-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(20px); /* Efecto borroso idéntico al de Canva */
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.kos-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    align-items: start; /* Alinea los elementos desde arriba para permitir el salto */
+    max-width: 1100px;
+    width: 100%;
+}
+
+/* Efecto escalonado para las tarjetas pares */
+.kos-card.card-down {
+    margin-top: 40px; 
+}
+
+.kos-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.kos-card:hover {
+    transform: translateY(-8px);
+}
+
+.kos-card-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0; /* Margen simétrico para separar del texto arriba o abajo */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.kos-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.kos-card:hover .kos-card-img img {
+    transform: scale(1.05);
+}
+
+.kos-card h3 {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: #ffffff;
+    -webkit-text-stroke: 1.5px var(--kos-dark-red); /* Trazo rojo oscuro */
+    letter-spacing: 1px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Le da un poco más de relieve */
+}
+
+/* =========================================
+   5. DISEÑO RESPONSIVO (Tablets y Celulares)
+   ========================================= */
+
+@media (max-width: 900px) {
+    .kos-grid {
+        grid-template-columns: repeat(2, 1fr); /* Pasa a 2 columnas */
+        gap: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .kos-hero {
+        height: 45vh; /* Se hace más chica la foto principal */
+    }
+    .kos-grid {
+        grid-template-columns: 1fr; /* Pasa a 1 sola columna */
+        gap: 50px;
+    }
+    .kos-card-img {
+        max-width: 320px; /* Limita el tamaño en celulares para que no se vea gigante */
+    }
+}
+
+@media (max-width: 500px) {
+    .kos-hero {
+        height: 45vh; 
+    }
+    .kos-grid {
+        grid-template-columns: 1fr; 
+        gap: 50px;
+    }
+    .kos-card.card-down {
+        margin-top: 0; /* Quitamos el salto escalonado en celulares */
+    }
+    .kos-card-img {
+        max-width: 320px; 
+    }
+}
+
+/* =========================================
+   6. SECCIÓN: HISTORIA (K-OS GLOW)
+   ========================================= */
+
+/* Fondo específico para esta página */
+body.history-page {
+    background-color: #fdf9f9; /* Color rosado/crema muy pálido */
+    position: relative;
+}
+
+/* Botón flotante de "Home" */
+.home-button {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.home-button:hover {
+    transform: scale(1.1);
+}
+
+/* Imagen superior (recorte) */
+.history-hero {
+    width: 100%;
+    height: 35vh; /* Ocupa el 35% superior de la pantalla */
+    min-height: 250px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.history-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que el GIF llene todo el ancho sin deformarse */
+    object-position: center center; /* ¡Esta es la clave! Centra el GIF exactamente a la mitad */
+}
+
+/* Contenedor central del texto */
+.history-content {
+    max-width: 800px; /* Evita que el texto se haga muy largo en monitores */
+    margin: 0 auto;
+    padding: 50px 20px 80px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.history-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--kos-red);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.history-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--kos-red);
+    text-align: justify; /* Justificado como en tu diseño */
+    margin-bottom: 20px;
+}
+
+/* --- BLOQUE: YOUTUBE ERA --- */
+.youtube-era-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 50px 0;
+}
+
+.yt-icon {
+    width: clamp(70px, 10vw, 100px);
+    height: auto;
+    object-fit: contain;
+}
+
+.yt-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea la palabra ERA a la derecha de YouTube */
+}
+
+.yt-word {
+    font-family: 'Passion One', impact, sans-serif;
+    font-size: clamp(4rem, 8vw, 6rem);
+    color: #000000;
+    line-height: 0.8;
+    letter-spacing: 2px;
+}
+
+.era-word {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #000000;
+    line-height: 0.9;
+    letter-spacing: 1px;
+}
+
+/* --- DECORACIÓN INFERIOR --- */
+.history-decoration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 150px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.history-decoration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8; /* Si pones un png de estrellitas y un corazón, esto lo hace sutil */
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .history-text {
+        text-align: center; /* En celulares se lee mejor centrado que justificado */
+    }
+    .youtube-era-box {
+        flex-direction: column; /* Apila el botón y el texto */
+        gap: 10px;
+    }
+    .yt-text-group {
+        align-items: center; /* Centra el texto */
+    }
+}
+
+/* =========================================
+   7. SECCIÓN: DISCOGRAFÍA (PRE-MENÚ)
+   ========================================= */
+
+body.discography-page {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ocupa exactamente el 100% del alto de la pantalla */
+    width: 100vw;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Elimina cualquier barra de scroll */
+    position: relative;
+}
+
+/* La imagen de Kenia de fondo */
+.disco-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 50% centra la imagen a lo ancho. 
+       Cambia el 15% para moverla hacia arriba o hacia abajo a tu gusto */
+    object-position: 50% 15%; 
+    opacity: 0.55; 
+    z-index: 1;
+}
+
+/* Garabatos decorativos */
+.deco-squizzle {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none; /* Permite hacer clic "a través" de ellos sin que estorben */
+    width: clamp(100px, 20vw, 250px);
+}
+
+.deco-top-left {
+    top: 30px;
+    left: 30px;
+}
+
+.deco-bottom-right {
+    bottom: 30px;
+    right: 30px;
+}
+
+/* Botón flotante de Home específico para esta pantalla */
+.discography-page .home-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 20;
+}
+
+/* Contenedor apilado de los álbumes */
+/* Contenedor apilado de los álbumes */
+.album-menu {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    /* Reducimos el espacio entre los logos para que queden más juntos */
+    gap: clamp(10px, 2.5vh, 25px); 
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.album-link {
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.album-link img {
+    /* Aumentamos significativamente el tamaño base y máximo de los logos */
+    width: clamp(250px, 45vw, 480px); 
+    height: auto;
+    /* Límite de altura para asegurar que los 4 logos quepan sin hacer scroll vertical */
+    max-height: 18vh; 
+    object-fit: contain;
+    /* Sombra oscura para separar el logo 3D del fondo */
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.8)); 
+}
+
+/* Efecto de iluminación y zoom al pasar el ratón */
+.album-link:hover {
+    transform: scale(1.1);
+    /* Cambia la sombra oscura por un resplandor blanco suave */
+    filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.4)); 
+}
+
+/* =========================================
+   8. PLANTILLA MAESTRA DE ÁLBUMES
+   ========================================= */
+
+
+/* =========================================
+   8. PLANTILLA MAESTRA DE ÁLBUMES
+   ========================================= */
+
+body.album-master-page {
+    background-color: #050505; /* Fondo negro por defecto */
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* --- LA IMAGEN DE FONDO ESTRELLADO --- */
+.album-bg {
+    position: fixed; /* Hace que el fondo se quede quieto al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 50% 15%;
+    z-index: 0; /* Lo manda hasta el fondo */
+    opacity: 0.6; /* Oscurece un poco las estrellas para que el texto se lea perfecto */
+    pointer-events: none; /* Evita que la imagen estorbe al hacer clic */
+}
+
+/* IMPORTANTE: Ajustamos el contenedor para que pase por encima del fondo */
+.album-detail-container {
+    position: relative;
+    z-index: 10; /* Asegura que el contenido pase por encima de las estrellas */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.album-master-page {
+    background-color: #050505;
+    /* Si tienes una foto del espacio/estrellas, pon la ruta aquí: */
+    background-image: url('images/fondo_estrellas.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* El fondo se queda quieto al hacer scroll */
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Botón flotante de la casita */
+.home-button-corner {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.home-button-corner:hover {
+    transform: scale(1.1);
+}
+
+/* Contenedor central */
+.album-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo superior */
+.album-logo-wrapper {
+    margin-bottom: 25px;
+}
+
+.album-logo-wrapper img {
+    width: clamp(200px, 30vw, 350px);
+    height: auto;
+    filter: drop-shadow(0px 5px 15px rgba(255, 255, 255, 0.2)); /* Ligero resplandor */
+}
+
+/* Párrafo introductorio centrado y en negrita */
+.album-lead-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 800;
+    text-align: center;
+    max-width: 750px;
+    margin-bottom: 60px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Cuadrícula para el zig-zag */
+.album-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide en dos columnas exactas */
+    gap: 50px 60px; /* Separación vertical y horizontal */
+    align-items: center;
+    width: 100%;
+}
+
+.info-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: justify;
+    font-weight: 500;
+    margin: 0;
+}
+
+.info-image {
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo para las fotos normales (borde blanco y esquinas redondas) */
+.info-image.bordered img {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para imágenes PNG sin fondo (como el gatito) */
+.info-image.transparent img {
+    width: 100%;
+    max-width: 250px; /* Lo limitamos para que no se vea gigante */
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+}
+
+
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .album-top-tracks {
+        padding: 30px 15px;
+    }
+    .track-item {
+        padding: 12px 10px;
+    }
+    .track-name {
+        font-size: 0.95rem;
+    }
+    .track-views {
+        font-size: 0.85rem;
+    }
+}
+
+/* =========================================
+   9. SECCIÓN TOP CANCIONES
+   ========================================= */
+
+.album-top-tracks {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 80px; /* Separación de la cuadrícula de arriba */
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo negro semitransparente */
+    border-radius: 15px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Efecto de cristal esmerilado con el fondo de estrellas */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Título de la sección en azul */
+.tracks-heading {
+    font-family: var(--kos-font);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #00d2ff; /* Color azul cian */
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.tracks-subtitle {
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    text-align: center;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* El contenedor de la lista */
+.track-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre canciones */
+}
+
+/* Fila de canción convertida en enlace */
+.track-item {
+    display: flex;
+    justify-content: space-between; /* Manda el lado izquierdo a un lado y las vistas al otro */
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-decoration: none; /* Evita que el texto del enlace salga subrayado */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.track-item:hover {
+    background-color: rgba(255, 255, 255, 0.08); /* Brilla un poco al pasar el mouse */
+    transform: scale(1.02); /* Efecto de botón al pasar el mouse */
+}
+
+.track-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Números en azul */
+.track-number {
+    font-family: var(--kos-font);
+    font-size: 1.5rem;
+    color: #00d2ff; /* Color azul cian */
+    width: 25px; /* Fija un ancho para que todos los números queden alineados */
+    text-align: right;
+}
+
+.track-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.track-right {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #cccccc;
+}
+
+.track-views {
+    letter-spacing: 0.5px;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .album-top-tracks {
+        padding: 30px 15px;
+    }
+    .track-item {
+        padding: 12px 10px;
+    }
+    .track-name {
+        font-size: 0.95rem;
+    }
+    .track-views {
+        font-size: 0.85rem;
+    }
+}
+
+/* =========================================
+   10. SECCIÓN: PRODUCTOS
+   ========================================= */
+
+body.products-page {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    min-height: 100vh;
+    overflow-x: hidden; /* Evita scroll horizontal si las fotos son muy grandes */
+}
+
+/* El contenedor divide la pantalla en 4 partes iguales */
+.products-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh; /* Ocupa siempre el 100% de la pantalla */
+    min-height: 800px; /* Tamaño mínimo para que no colapse en pantallas chiquitas */
+}
+
+.product-banner {
+    position: relative;
+    flex: 1; /* Reparte el espacio vertical por igual */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: filter 0.3s ease;
+}
+
+.product-banner:hover {
+    filter: brightness(1.15); /* Ilumina la franja al pasar el mouse */
+}
+
+/* DEGRADADOS (Efecto Tubo de Luz) */
+.bg-blue {
+    background: linear-gradient(to bottom, #00173d 0%, #0072ff 50%, #000a1a 100%);
+}
+.bg-grey {
+    background: linear-gradient(to bottom, #111111 0%, #8a8a8a 50%, #050505 100%);
+}
+.bg-red {
+    background: linear-gradient(to bottom, #3a0000 0%, #d40000 50%, #1a0000 100%);
+}
+.bg-darkred {
+    background: linear-gradient(to bottom, #1a0000 0%, #600000 50%, #0a0000 100%);
+}
+
+/* TÍTULOS DE LOS PRODUCTOS */
+.product-title {
+    font-family: var(--kos-font);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    color: #ffffff;
+    /* Efecto de subrayado grueso */
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 6px;
+    z-index: 2;
+    margin: 0;
+    text-shadow: 2px 5px 15px rgba(0, 0, 0, 0.7); /* Sombra para que se lea perfecto */
+}
+
+/* Alineaciones alternadas */
+.title-left { margin-left: 15%; margin-right: auto; }
+.title-right { margin-right: 15%; margin-left: auto; }
+
+/* IMÁGENES QUE SOBRESALEN */
+.product-img {
+    position: absolute;
+    height: 130%; /* Supera el 100% para salirse de su propia franja */
+    z-index: 10; /* Las pone por encima de todos los fondos */
+    object-fit: contain;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0px 15px 20px rgba(0, 0, 0, 0.8)); /* Sombra a la imagen */
+    pointer-events: none; /* ¡MAGIA! El clic atraviesa la foto y activa la franja */
+}
+
+.product-banner:hover .product-img {
+    transform: scale(1.08) rotate(2deg); /* Pequeño salto juguetón al hacer hover */
+}
+
+/* Posiciones de las imágenes */
+.img-left { left: 8%; top: -15%; }
+.img-right { right: 8%; top: -15%; }
+
+/* POSICIONES DOBLES PARA K DE KARMA MERCH */
+.img-kkarma-back {
+    right: 2%; /* Pegado a la derecha */
+    top: -15%;
+    z-index: 10; /* Nivel base */
+}
+
+.img-kkarma-front {
+    right: 18%; /* Más a la izquierda para no tapar todo el vinilo */
+    top: -5%; /* Un poco más abajo */
+    z-index: 11; /* Por encima del vinilo */
+    height: 120%; /* Ajuste de tamaño para el monito */
+}
+
+/* ADAPTACIÓN PARA CELULARES - K DE KARMA DOBLE */
+@media (max-width: 768px) {
+    .img-kkarma-back { 
+        right: -5%; 
+        height: 100%; 
+    }
+    .img-kkarma-front { 
+        right: 12%; 
+        height: 100%; 
+    }
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+@media (max-width: 768px) {
+    .products-container {
+        height: auto; /* Permite que fluya normal en celular */
+        min-height: 100vh;
+    }
+    .product-banner {
+        height: 25vh; /* Cada franja ocupa 1/4 de la pantalla */
+        min-height: 200px;
+    }
+    .title-left { margin-left: 5%; }
+    .title-right { margin-right: 5%; }
+    .product-title {
+        text-underline-offset: 4px;
+        text-decoration-thickness: 3px;
+    }
+    .product-img {
+        height: 110%; /* Se encogen un poco en móvil para no tapar los textos */
+    }
+    .img-left { left: 2%; }
+    .img-right { right: 2%; }
+}
+
+/* Adaptación para celulares */
+@media (max-width: 768px) {
+    .album-info-grid {
+        grid-template-columns: 1fr; /* Pasa a una sola columna */
+        gap: 40px;
+    }
+    
+    .info-text p {
+        text-align: center; /* En móvil se lee mejor centrado */
+    }
+}
+
+/* =========================================
+   11. SECCIÓN: CONCIERTOS
+   ========================================= */
+
+body.conciertos-page {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* Imagen de fondo fija */
+.conciertos-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center; /* Ajusta a "top center" si quieres que priorice la parte de arriba */
+    z-index: 0;
+    opacity: 0.65; /* Oscurece la foto para resaltar las letras */
+    pointer-events: none;
+}
+
+/* Contenedor Flexbox a dos columnas */
+.conciertos-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1300px;
+    padding: 60px 40px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* COLUMNA IZQUIERDA (Lista) */
+.fechas-list {
+    flex: 1.5; /* Ocupa un poco más de espacio que la imagen */
+    min-width: 320px;
+}
+
+.fechas-list ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.fechas-list li {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; /* Letra extra gruesa */
+    font-size: clamp(1.1rem, 2vw, 1.5rem); /* Se adapta al tamaño del monitor */
+    line-height: 1.4;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    /* Sombra paralela pesada: clave para que se lea sobre la foto */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1), -1px -1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Fechas que ya pasaron */
+.fechas-list li.past-date {
+    color: #c41c1c; /* Un tono rojo sangre similar a tu diseño */
+}
+
+/* Fechas por venir */
+.fechas-list li.upcoming-date {
+    color: #ffffff;
+}
+
+/* COLUMNA DERECHA (Perrito) */
+.conciertos-image {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.conciertos-image img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 18px; /* Esquinas redondeadas */
+    border: 4px solid #ffffff; /* Borde blanco */
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.7);
+    transition: transform 0.4s ease;
+}
+
+.conciertos-image img:hover {
+    transform: scale(1.05) rotate(-2deg); /* Efecto sutil al pasar el mouse */
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+@media (max-width: 900px) {
+    .conciertos-container {
+        flex-direction: column-reverse; /* Pone la imagen arriba y el texto abajo en celular */
+        padding: 80px 20px 40px;
+        gap: 40px;
+    }
+    
+    .fechas-list li {
+        font-size: 1.05rem; /* Achica un poco el texto para que no desborde */
+    }
+}
+
+/* =========================================
+   13. BOTÓN DE ACCESO AL QUIZ (MENÚ)
+   ========================================= */
+
+/* Contenedor para centrar el botón debajo del menú */
+.quiz-section-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Espacio de separación con las 4 opciones de arriba */
+    margin-bottom: 50px;
+}
+
+/* Estilo del botón */
+.quiz-link-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: linear-gradient(90deg, #ff0055, #d40000); /* Degradado rosa a rojo */
+    color: #ffffff;
+    font-family: 'Passion One', sans-serif; /* Usa la misma fuente gruesa de tus títulos */
+    font-size: 1.8rem;
+    text-decoration: none;
+    border-radius: 50px; /* Bordes totalmente redondeados */
+    box-shadow: 0 5px 20px rgba(255, 0, 85, 0.4); /* Sombra base */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Animación al pasar el mouse */
+.quiz-link-button:hover {
+    transform: scale(1.05) translateY(-3px); /* Crece y flota un poco hacia arriba */
+    box-shadow: 0 10px 30px rgba(255, 0, 85, 0.8); /* El resplandor se hace más intenso */
+    filter: brightness(1.1); /* Se ilumina */
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .quiz-link-button {
+        font-size: 1.4rem;
+        padding: 15px 25px;
+        width: 90%; /* Evita que choque con los bordes de la pantalla */
+    }
+}
+
+/* =========================================
+   12. SECCIÓN: QUIZ KENINI (ESTILO K DE KARMA)
+   ========================================= */
+
+body.quiz-page {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Fondo GIF en Blanco y Negro (estilo foto central K de Karma) */
+.quiz-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.4; /* Oscurecido para que el quiz se lea bien */
+    filter: grayscale(100%) contrast(120%); /* Lo vuelve blanco y negro contrastado */
+    pointer-events: none;
+}
+
+/* Contenedor Principal del Quiz */
+.quiz-container {
+    position: relative;
+    z-index: 10;
+    background-color: #0a0a0a; /* Fondo casi negro sólido */
+    border-radius: 15px;
+    padding: 40px;
+    margin: 40px 20px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(230, 0, 0, 0.2);
+}
+
+/* El truco del borde degradado con los colores de K de Karma */
+.quiz-container::before {
+    content: "";
+    position: absolute;
+    top: -4px; bottom: -4px; left: -4px; right: -4px;
+    /* Rojo, Azul Rey y Amarillo Mostaza */
+    background: linear-gradient(135deg, #e60000 0%, #1432b4 50%, #ffc800 100%);
+    z-index: -1;
+    border-radius: 19px; /* Un poco mayor al del contenedor para que envuelva bien */
+}
+
+/* Título estilo Grungy/Pop Art */
+.quiz-main-title {
+    font-family: 'Passion One', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    /* Sombra doble: Roja y Azul */
+    text-shadow: 4px 4px 0px #e60000, -3px -3px 0px #1432b4;
+}
+
+/* Preguntas y Opciones */
+.question-block {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.question-text {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.option-label {
+    background-color: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #333333;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Efecto hover con los colores de la paleta */
+.option-label:hover {
+    background-color: #2a2a2a;
+    border-color: #ffc800; /* Borde amarillo al pasar el mouse */
+}
+
+.option-label input[type="radio"] {
+    display: none;
+}
+
+/* Estilo cuando la opción está seleccionada */
+.option-label.selected {
+    background-color: #e60000; /* Fondo rojo fuerte */
+    border-color: #e60000;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(230, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+
+/* Botones de acción */
+.submit-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 30px auto 0;
+    padding: 15px;
+    background-color: #1432b4; /* Azul Rey */
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    border: 2px solid #1432b4;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover { 
+    background-color: transparent;
+    color: #1432b4;
+    box-shadow: 0 0 20px rgba(20, 50, 180, 0.6);
+}
+
+.reload-btn { 
+    background-color: #ffc800; /* Amarillo */
+    color: #000; 
+    border-color: #ffc800;
+}
+.reload-btn:hover {
+    background-color: transparent;
+    color: #ffc800;
+    box-shadow: 0 0 20px rgba(255, 200, 0, 0.6);
+}
+
+/* Resultados */
+.results-box {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: rgba(20, 50, 180, 0.1);
+    border-radius: 15px;
+    border: 2px dashed #1432b4;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Estilo forzado para el GIF de resultados */
+#result-gif {
+    display: block !important;
+    margin: 0 auto 20px auto !important; /* Lo centra y empuja el texto hacia abajo */
+    width: 100% !important;
+    max-width: 250px !important; /* Evita que se haga gigante */
+    height: auto !important;
+    border-radius: 10px !important;
+    border: 3px solid #ffc800 !important; /* El borde amarillo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6) !important;
+    position: relative !important;
+    z-index: 20 !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+.result-gif-style {
+    width: 100%;
+    max-width: 280px; 
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 3px solid #ffc800;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+
+#score-text { font-family: 'Passion One', sans-serif; font-size: 4.5rem; margin: 0 0 10px; color: #ffc800; }
+#rank-text { font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 30px; }
+
+@media (max-width: 600px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .quiz-container { margin: 80px 15px 20px; padding: 30px 20px; }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
