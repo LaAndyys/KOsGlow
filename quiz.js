@@ -1,6 +1,17 @@
-// =========================================================================
-// 1. BASE DE DATOS DEL QUIZ (20 Preguntas)
-// =========================================================================
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB0k2aacgWKP5pshZ66UVIYl6N6nu1uSKE",
+  authDomain: "k-os-glow-quiz.firebaseapp.com",
+  projectId: "k-os-glow-quiz",
+  storageBucket: "k-os-glow-quiz.firebasestorage.app",
+  messagingSenderId: "955935618659",
+  appId: "1:955935618659:web:46e99e53bd16f1466cea56"
+};
+
+// Inicializamos Firebase y la Base de Datos usando la versión Compat
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 const quizData = [
     { q: "¿Cuál es el nombre completo de Kenia Os?", correct: "Kenia Guadalupe Flores Osuna", wrong: ["Kenia María Flores Osuna", "Kenia Guadalupe Osuna Flores", "Kenia Daniela Flores Osuna"] },
     { q: "¿En qué ciudad y estado nació?", correct: "Mazatlán, Sinaloa, México", wrong: ["Culiacán, Sinaloa, México", "Tijuana, Baja California, México", "Monterrey, Nuevo León, México"] },
@@ -19,7 +30,7 @@ const quizData = [
     { q: "¿Qué canción de Kenia incluye la frase 'ya no somos ni seremos'?", correct: "Ninguna; esa canción es de Christian Nodal.", wrong: ["Llévatelo", "La Noche", "Malas Decisiones"] },
     { q: "¿Cuál fue el nombre de la gira con la que recorrió varios países en 2023?", correct: "K23 Tour", wrong: ["Cambios de Luna Tour", "Keninis Tour", "Pink Aura Tour"] },
     { q: "¿Cómo se llama la canción que lanzó junto a Gera MX?", correct: "“Diamantes”", wrong: ["Los Santos", "Plutón", "Rumores"] },
-    { q: "¿Cuál es el signo zodiacal de Kenia Os?", correct: "Cáncer", wrong: ["Leo", "Géminis", "Virgo"] },
+    { q: "¿Cuál es el signo zodiacal de Kenia Os?", correct: "Cáncer (nació el 15 de julio de 1999)", wrong: ["Leo", "Géminis", "Virgo"] },
     { q: "¿Cuántos hermanos tiene Kenia?", correct: "Dos: una hermana llamada Eloísa y un hermano llamado César.", wrong: ["Solo una hermana llamada Eloísa.", "Tres hermanos.", "Es hija única."] },
     { q: "¿Cuál es el nombre de su fandom oficial?", correct: "Keninis", wrong: ["Osunas", "K-lovers", "Kenia Fans"] }
 ];
@@ -78,7 +89,7 @@ function selectOption(labelElement, questionIndex) {
 }
 
 // =========================================================================
-// 3. EVALUACIÓN Y RESULTADOS
+// 3. EVALUACIÓN Y RESULTADOS CON ENVÍO A FIREBASE
 // =========================================================================
 
 document.getElementById('submit-quiz-btn').addEventListener('click', () => {
@@ -100,12 +111,11 @@ function showResults(score) {
     const resultsBox = document.getElementById('quiz-results');
     const scoreText = document.getElementById('score-text');
     const rankText = document.getElementById('rank-text');
-    const resultGif = document.getElementById('result-gif'); // Busca la etiqueta IMG
+    const resultGif = document.getElementById('result-gif'); 
 
     resultsBox.style.display = "block";
     scoreText.innerText = `${score} / 10`;
 
-    // Forzamos la carga del GIF en el recuadro
     if (resultGif) {
         resultGif.src = "images/kenia_quiz.gif";
     }
@@ -121,6 +131,22 @@ function showResults(score) {
     } else {
         rankText.innerText = "¿Villano encubierto? 🦂 Ouch, toca repasar la historia de Kenia.";
     }
+    
+    // -----------------------------------------------------------------
+    // PROCESAMIENTO EN LA NUBE: Envío de métricas a Cloud Firestore
+    // -----------------------------------------------------------------
+    db.collection("metricas_quiz").add({
+        puntuacion: score,
+        rango_kenini: rankText.innerText,
+        fecha_registro: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then((docRef) => {
+        console.log("Métrica guardada exitosamente en la nube con ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error crítico al interactuar con el servicio Firestore: ", error);
+    });
+    // -----------------------------------------------------------------
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
